@@ -1,0 +1,6 @@
+package com.example.user_service.api.dto;
+
+public record RegisterResponse(
+        String userId,
+        TokenResponse tokenInfo
+) { }
