@@ -11,7 +11,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>pdf-document-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name/>
+	<name>pdf-document-service</name>
 	<description/>
 	<url/>
 	<licenses>

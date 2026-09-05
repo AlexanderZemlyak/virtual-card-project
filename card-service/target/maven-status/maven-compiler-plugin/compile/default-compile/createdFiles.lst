@@ -1,6 +1,0 @@
-com\example\cardservice\outbox\OutboxEvent.class
-com\example\cardservice\outbox\OutboxEventRepository.class
-com\example\cardservice\outbox\OutboxService.class
-com\example\cardservice\config\SchedulingConfig.class
-com\example\cardservice\outbox\OutboxPublisher.class
-com\example\cardservice\producers\events\ApplicationScoredEvent.class
