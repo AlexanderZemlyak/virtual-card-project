@@ -13,9 +13,4 @@ public class TestMockConfig {
     public CustomerProvider customerProvider() {
         return Mockito.mock(CustomerProvider.class);
     }
-
-    @Bean
-    public ScoringService scoringService() {
-        return Mockito.mock(ScoringService.class);
-    }
 }
