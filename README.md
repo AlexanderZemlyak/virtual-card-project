@@ -2,17 +2,16 @@
 
 Backend для системы выпуска виртуальных банковских карт.
 
-Проект состоит из нескольких Spring Boot микросервисов и запускается с помощью Docker Compose.
-
 ## Use Case
 
-Пользователь регистрируется или проходит аутентификацию в `user-service` и получает JWT-токен.
-
-С помощью полученного токена пользователь может отправить заявку на выпуск виртуальной карты в `card-service`.
-
-`card-service` получает необходимые данные о пользователе из `user-service`, выполняет проверку и скоринг заявки, после чего принимает решение о выпуске карты.
-
-При обработке заявки сервисы взаимодействуют через Kafka. События о результатах обработки могут использоваться для отправки уведомлений пользователю и генерации необходимых документов.
+1. Пользователь регистрируется через `user-service` и получает JWT.
+2. Авторизованный пользователь отправляет заявку на выпуск карты в `card-service`.
+3. `card-service` получает необходимые данные пользователя через REST-запрос к `user-service`.
+4. Заявка проходит scoring.
+5. После успешного выпуска карты `card-service` сохраняет событие в Outbox.
+6. Событие публикуется в Kafka.
+7. `notification-service` обрабатывает событие и отправляет уведомление.
+8. `pdf-document-service` генерирует PDF с информацией о выпущенной карте.
 
 ## Архитектура
 
@@ -23,9 +22,12 @@ Backend для системы выпуска виртуальных банков
 * **notification-service** — обработка событий и отправка уведомлений.
 * **pdf-document-service** — генерация PDF-документов.
 
-Для синхронного взаимодействия `card-service` использует REST API `user-service`.
+`card-service` реализует синхронное взаимодействие с `user-service` через REST API.
 
-Для асинхронного взаимодействия между сервисами используется Apache Kafka. События, публикуемые `card-service`, обрабатываются `notification-service` и `pdf-document-service`.
+Для асинхронного взаимодействия между `card-service`, `notification-service` и `pdf-document-service` используется Apache Kafka.
+Для надёжной публикации событий используется паттерн Transactional Outbox:
+изменение статуса заявки в базе данных и запись события в Outbox выполняются в одной транзакции, 
+после чего отдельный процесс публикует событие в Kafka.
 
 ```text
                     ┌────────────────┐
@@ -58,9 +60,7 @@ Backend для системы выпуска виртуальных банков
 * Spring Data JPA / Hibernate
 * PostgreSQL
 * Apache Kafka
-* JUnit
-* Mockito
-* Testcontainers
+* JUnit / Mockito / Testcontainers
 * Maven
 * Docker / Docker Compose
 
@@ -79,7 +79,13 @@ virtual-card-project/
 
 ## Запуск
 
-Для запуска всех сервисов и необходимых зависимостей:
+### Зависимости
+
+- JDK 21
+- Docker
+- Docker Compose
+
+### Команда запуска
 
 ```bash
 docker compose up --build
@@ -95,10 +101,14 @@ docker compose up --build
 
 ## Тесты
 
-Для запуска тестов:
+Запуск в Linux / macOS:
 
 ```bash
-./mvnw test
+./mvnw clean verify
 ```
 
-В проекте используются JUnit, Mockito и Testcontainers.
+Windows:
+
+```bash
+./mvnw.cmd clean verify
+```
