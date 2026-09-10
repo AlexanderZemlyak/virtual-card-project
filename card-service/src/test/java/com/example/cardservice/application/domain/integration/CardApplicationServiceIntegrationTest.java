@@ -1,11 +1,11 @@
-package com.example.cardservice.application.domain.integration;
+package com.example.card_service.application.domain.integration;
 
-import com.example.cardservice.application.domain.CardApplicationService;
-import com.example.cardservice.application.api.dto.CardApplicationResponse;
-import com.example.cardservice.application.db.CardApplicationRepository;
-import com.example.cardservice.application.db.entities.CardApplicationEntity;
-import com.example.cardservice.application.enums.ApplicationStatus;
-import com.example.cardservice.application.providers.CustomerInfo;
+import com.example.card_service.application.domain.CardApplicationService;
+import com.example.card_service.application.api.dto.CardApplicationResponse;
+import com.example.card_service.application.db.CardApplicationRepository;
+import com.example.card_service.application.db.entities.CardApplicationEntity;
+import com.example.card_service.application.enums.ApplicationStatus;
+import com.example.card_service.application.providers.CustomerInfo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

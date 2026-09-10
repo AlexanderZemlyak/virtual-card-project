@@ -1,13 +1,13 @@
-package com.example.cardservice.application.domain.unit;
+package com.example.card_service.application.domain.unit;
 
-import com.example.cardservice.application.db.CardApplicationRepository;
-import com.example.cardservice.application.db.entities.CardApplicationEntity;
-import com.example.cardservice.application.domain.ScoringService;
-import com.example.cardservice.application.domain.events.ApplicationCreatedEvent;
-import com.example.cardservice.application.enums.ApplicationStatus;
-import com.example.cardservice.application.providers.CustomerInfo;
-import com.example.cardservice.outbox.OutboxService;
-import com.example.cardservice.producers.events.ApplicationScoredEvent;
+import com.example.card_service.application.db.CardApplicationRepository;
+import com.example.card_service.application.db.entities.CardApplicationEntity;
+import com.example.card_service.application.domain.ScoringService;
+import com.example.card_service.application.domain.events.ApplicationCreatedEvent;
+import com.example.card_service.application.enums.ApplicationStatus;
+import com.example.card_service.application.providers.CustomerInfo;
+import com.example.card_service.outbox.OutboxService;
+import com.example.card_service.producers.events.ApplicationScoredEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,6 +1,6 @@
-package com.example.cardservice.application.domain.integration.config;
+package com.example.card_service.application.domain.integration.config;
 
-import com.example.cardservice.config.AppConfig;
+import com.example.card_service.config.AppConfig;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 

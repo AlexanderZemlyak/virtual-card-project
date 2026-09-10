@@ -1,7 +1,7 @@
-package com.example.cardservice.application.domain.integration.config;
+package com.example.card_service.application.domain.integration.config;
 
-import com.example.cardservice.application.domain.ScoringService;
-import com.example.cardservice.application.providers.CustomerProvider;
+import com.example.card_service.application.domain.ScoringService;
+import com.example.card_service.application.providers.CustomerProvider;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

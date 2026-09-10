@@ -1,4 +1,4 @@
-package com.example.cardservice.application.domain.integration.config;
+package com.example.card_service.application.domain.integration.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
