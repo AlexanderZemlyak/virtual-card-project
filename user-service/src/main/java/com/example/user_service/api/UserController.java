@@ -38,27 +38,31 @@ public class UserController {
         User createdUser = userService.createUser(new UserData(registerRequest.userName(),
                 registerRequest.password(), registerRequest.age()));
 
-        var authentication = userService.authenticateUser(registerRequest.userName(),
+        userService.authenticateUser(registerRequest.userName(),
                 registerRequest.password());
 
         log.info("User {} was authenticated (registration)", registerRequest.userName());
 
+        var userId = createdUser.getId().toString();
+
         return ResponseEntity.status(HttpStatus.CREATED).body(new RegisterResponse(
-                createdUser.getId().toString(),
+                userId,
                 new TokenResponse(
-                jwtService.generateToken(authentication)
+                jwtService.generateToken(userId)
         )));
     }
 
     @PostMapping("/login")
     public ResponseEntity<TokenResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
-        var authentication = userService.authenticateUser(loginRequest.userName(),
+        userService.authenticateUser(loginRequest.userName(),
                 loginRequest.password());
 
         log.info("User {} was authenticated (login)", loginRequest.userName());
 
+        var userId = userService.getUser(loginRequest.userName()).id().toString();
+
         return ResponseEntity.ok(new TokenResponse(
-                jwtService.generateToken(authentication)
+                jwtService.generateToken(userId)
         ));
     }
 

@@ -58,7 +58,7 @@ public class UserService {
     @Transactional(readOnly = true)
     public UserResponse getUser(UUID id) {
 
-        User customer = repository.findById(id)
+        User user = repository.findById(id)
                 .orElseThrow(() ->
                         new IllegalArgumentException(
                                 "Пользователь с таким id не найден"
@@ -66,9 +66,26 @@ public class UserService {
                 );
 
         return new UserResponse(
-                customer.getId(),
-                customer.getName(),
-                customer.getAge()
+                user.getId(),
+                user.getName(),
+                user.getAge()
+        );
+    }
+
+    @Transactional(readOnly = true)
+    public UserResponse getUser(String userName) {
+
+        User user = repository.findByName(userName)
+                .orElseThrow(() ->
+                        new IllegalArgumentException(
+                                "Пользователь с таким userName не найден"
+                        )
+                );
+
+        return new UserResponse(
+                user.getId(),
+                user.getName(),
+                user.getAge()
         );
     }
 }

@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -74,11 +75,17 @@ public class CardApplicationService {
     }
 
     @Transactional(readOnly = true)
-    public CardApplicationResponse getApplication(UUID id) {
-        return repository.findById(id)
+    public CardApplicationResponse getApplication(UUID customerId, UUID id) {
+
+        var application = repository.findById(id)
                 .map(mapper::toDomain)
                 .map(mapper::toDTO)
                 .orElseThrow(() -> new ApplicationNotFoundException("Application not found: " + id));
+
+        if (!application.customerId().equals(customerId))
+            throw new AccessDeniedException("Access denied.");
+
+        return application;
     }
 
     @Transactional(readOnly = true)

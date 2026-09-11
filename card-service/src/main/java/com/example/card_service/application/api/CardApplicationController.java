@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,20 +26,31 @@ public class CardApplicationController {
 
     @PostMapping
     public ResponseEntity<CardApplicationResponse> createApplication(
-            @NotNull @RequestParam(name = "customerId") UUID customerId) {
+            Authentication authentication
+    ) {
+        UUID customerId = UUID.fromString(authentication.getName());
+
         CardApplicationResponse response = applicationService.createApplication(customerId);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CardApplicationResponse> getApplication(@NotNull @PathVariable(name = "id") UUID id) {
-        return ResponseEntity.ok(applicationService.getApplication(id));
+    public ResponseEntity<CardApplicationResponse> getApplication(
+            @PathVariable(name = "id") UUID id,
+            Authentication authentication
+    ) {
+        UUID customerId = UUID.fromString(authentication.getName());
+
+        return ResponseEntity.ok(applicationService.getApplication(customerId, id));
     }
 
-    @GetMapping("/customer/{customerId}")
-    public ResponseEntity<List<CardApplicationResponse>> getCustomerApplications(
-            @NotNull @PathVariable(name = "customerId") UUID customerId) {
+    @GetMapping("/my")
+    public ResponseEntity<List<CardApplicationResponse>> getMyApplications(
+            Authentication authentication
+    ) {
+        UUID customerId = UUID.fromString(authentication.getName());
+
         return ResponseEntity.ok(applicationService.getCustomerApplications(customerId));
     }
 }

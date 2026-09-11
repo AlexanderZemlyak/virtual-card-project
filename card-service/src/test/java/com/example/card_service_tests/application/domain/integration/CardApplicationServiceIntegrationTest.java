@@ -89,6 +89,7 @@ class CardApplicationServiceIntegrationTest
 
         CardApplicationResponse result =
                 service.getApplication(
+                        customerId,
                         createdApplication.applicationId()
                 );
 

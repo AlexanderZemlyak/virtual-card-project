@@ -163,7 +163,10 @@ class CardApplicationServiceTest {
                 .thenReturn(expectedResponse);
 
         CardApplicationResponse result =
-                service.getApplication(applicationId);
+                service.getApplication(
+                        UUID.randomUUID(),
+                        applicationId
+                );
 
         assertSame(expectedResponse, result);
 
@@ -193,7 +196,7 @@ class CardApplicationServiceTest {
 
         assertThrows(
                 ApplicationNotFoundException.class,
-                () -> service.getApplication(applicationId)
+                () -> service.getApplication(UUID.randomUUID(), applicationId)
         );
 
         verify(repository)

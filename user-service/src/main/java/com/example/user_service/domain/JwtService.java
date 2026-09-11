@@ -17,12 +17,12 @@ public class JwtService {
         this.encoder = encoder;
     }
 
-    public String generateToken(Authentication authentication) {
+    public String generateToken(String userId) {
 
         Instant now = Instant.now();
 
         JwtClaimsSet claims = JwtClaimsSet.builder()
-                .subject(authentication.getName())
+                .subject(userId)
                 .issuedAt(now)
                 .expiresAt(now.plus(1, ChronoUnit.HOURS))
                 .build();
