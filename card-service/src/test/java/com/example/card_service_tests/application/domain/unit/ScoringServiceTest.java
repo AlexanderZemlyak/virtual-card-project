@@ -1,4 +1,4 @@
-package com.example.card_service.application.domain.unit;
+package com.example.card_service_tests.application.domain.unit;
 
 import com.example.card_service.application.db.CardApplicationRepository;
 import com.example.card_service.application.db.entities.CardApplicationEntity;

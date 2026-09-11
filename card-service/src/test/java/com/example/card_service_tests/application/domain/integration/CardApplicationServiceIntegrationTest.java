@@ -1,19 +1,24 @@
-package com.example.card_service.application.domain.integration;
+package com.example.card_service_tests.application.domain.integration;
 
 import com.example.card_service.application.domain.CardApplicationService;
 import com.example.card_service.application.api.dto.CardApplicationResponse;
 import com.example.card_service.application.db.CardApplicationRepository;
 import com.example.card_service.application.db.entities.CardApplicationEntity;
+import com.example.card_service_tests.application.domain.integration.config.CardApplicationServiceTestConfig;
 import com.example.card_service.application.enums.ApplicationStatus;
 import com.example.card_service.application.providers.CustomerInfo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringJUnitConfig({
+    CardApplicationServiceTestConfig.class
+})
 class CardApplicationServiceIntegrationTest
         extends IntegrationTest {
 

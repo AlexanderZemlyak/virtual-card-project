@@ -1,6 +1,6 @@
-package com.example.card_service.application.domain.integration;
+package com.example.card_service_tests.application.domain.integration;
 
-import com.example.card_service.application.domain.integration.config.IntegrationTestConfig;
+import com.example.card_service_tests.application.domain.integration.config.IntegrationTestConfig;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;

@@ -6,8 +6,10 @@ import com.example.card_service.application.providers.CustomerInfo;
 import com.example.card_service.application.db.CardApplicationRepository;
 import com.example.card_service.outbox.OutboxService;
 import com.example.card_service.producers.events.ApplicationScoredEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Profile;
+import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -16,7 +18,6 @@ import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 @Service
-@Profile("!test")
 public class ScoringService {
 
     private static final String APPROVED_TOPIC =
@@ -27,6 +28,7 @@ public class ScoringService {
 
     private final CardApplicationRepository repository;
     private final OutboxService outboxService;
+    private static final Logger log = LoggerFactory.getLogger(ScoringService.class);
 
     private final long scoringDelay;
 
@@ -45,6 +47,8 @@ public class ScoringService {
     )
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void scoreApplication(ApplicationCreatedEvent e) {
+
+        log.info("Application {} scoring started...", e.applicationId());
 
         var applicationEntity = repository.findById(e.applicationId())
                 .orElseThrow(() -> new RuntimeException("Ошибка в логике сервиса. Заявление должно быть."));
