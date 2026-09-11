@@ -142,6 +142,7 @@ class CardApplicationServiceTest {
     @Test
     void getApplication_shouldReturnApplication_whenApplicationExists() {
 
+        UUID customerId = UUID.randomUUID();
         UUID applicationId = UUID.randomUUID();
 
         CardApplicationEntity entity =
@@ -152,6 +153,9 @@ class CardApplicationServiceTest {
 
         CardApplicationResponse expectedResponse =
                 mock(CardApplicationResponse.class);
+
+        when(expectedResponse.customerId())
+                .thenReturn(customerId);
 
         when(repository.findById(applicationId))
                 .thenReturn(Optional.of(entity));
@@ -164,7 +168,7 @@ class CardApplicationServiceTest {
 
         CardApplicationResponse result =
                 service.getApplication(
-                        UUID.randomUUID(),
+                        customerId,
                         applicationId
                 );
 
