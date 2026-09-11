@@ -1,4 +1,4 @@
-package com.example.card_service_tests.application.domain.integration.config;
+package com.example.card_service_tests.integration.config;
 
 import com.example.card_service.application.providers.CustomerProvider;
 import com.example.card_service.config.AppConfig;

@@ -7,6 +7,7 @@ import com.example.card_service.application.db.entities.CardApplicationEntity;
 import com.example.card_service_tests.application.domain.integration.config.CardApplicationServiceTestConfig;
 import com.example.card_service.application.enums.ApplicationStatus;
 import com.example.card_service.application.providers.CustomerInfo;
+import com.example.card_service_tests.integration.IntegrationTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

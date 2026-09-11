@@ -7,6 +7,7 @@ import com.example.card_service.application.enums.ApplicationStatus;
 import com.example.card_service.application.providers.CustomerInfo;
 import com.example.card_service.outbox.OutboxEventRepository;
 import com.example.card_service.producers.events.ApplicationScoredEvent;
+import com.example.card_service_tests.integration.IntegrationTest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
