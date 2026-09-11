@@ -10,21 +10,22 @@ import java.util.UUID;
 public class OutboxEvent {
 
     @Id
+    @Column(name = "id")
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(name = "topic", nullable = false)
     private String topic;
 
-    @Column(nullable = false)
+    @Column(name = "event_type", nullable = false)
     private String eventType;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(name = "payload", nullable = false, columnDefinition = "TEXT")
     private String payload;
 
-    @Column(nullable = false)
+    @Column(name = "created_at", nullable = false)
     private Instant createdAt;
 
-    @Column(nullable = false)
+    @Column(name = "processed", nullable = false)
     private boolean processed;
 
     protected OutboxEvent() {
