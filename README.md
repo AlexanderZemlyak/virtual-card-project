@@ -59,6 +59,7 @@ Backend для системы выпуска виртуальных банков
 * JWT
 * Spring Data JPA / Hibernate
 * PostgreSQL
+* Flyway
 * Apache Kafka
 * JUnit / Mockito / Testcontainers
 * Maven
